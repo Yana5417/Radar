@@ -320,28 +320,21 @@ class Radar {
       let color = this.colors[i] || '#333333';
 
       // 当文本长度大于4时，分成两列
-      if (text.length > 4) {
-        let firstLine = text.slice(0, 4);
-        let secondLine = text.slice(4);
-        if (text.slice(0, 5) == 'STEAM') {
-          firstLine = text.slice(0, 7);
-          secondLine = text.slice(7);
-        }
-        if (incY < 0) incY = -20;
-        if (incY > 0) incY = -5;
-        if (incY == 0) incY = -10;
+      let firstLine = text.slice(0, text.length-1);
+      let secondLine = text.slice(text.length-1);
 
-        this.ctx.setFillStyle(color);
-        this.ctx.setFontSize(18);
-        this.ctx.fillText(secondLine, x + incX, y + incY);
+      if (incY < 0) incY = -20;
+      if (incY > 0) incY = -5;
+      if (incY == 0) incY = -10;
 
-        this.ctx.setFontSize(12);
-        this.ctx.setFillStyle('#666');
-        this.ctx.fillText(firstLine, x + incX, y + incY + 18);
-        this.ctx.setTextAlign('center');
-      } else {
-        this.ctx.fillText(text, x + incX, y + incY);
-      }
+      this.ctx.setFillStyle(color);
+      this.ctx.setFontSize(18);
+      this.ctx.fillText(secondLine, x + incX, y + incY);
+
+      this.ctx.setFontSize(12);
+      this.ctx.setFillStyle('#666');
+      this.ctx.fillText(firstLine, x + incX, y + incY + 18);
+      this.ctx.setTextAlign('center');
 
       initrad += rad;
     }
