@@ -319,9 +319,17 @@ class Radar {
 
       let color = this.colors[i] || '#333333';
 
-      // 当文本长度大于4时，分成两列
-      let firstLine = text.slice(0, text.length-1);
-      let secondLine = text.slice(text.length-1);
+      let _text = (text || '').trim();
+
+      // 数字和文本分成两列
+      let number = '0';
+      let match = _text.match(/([0-9]+)$/);
+      if (match) number = match[1] || number;
+
+      // 文本行
+      let firstLine = _text.replace(number, '').trim();
+      // 数字行
+      let secondLine = number;
 
       if (incY < 0) incY = -20;
       if (incY > 0) incY = -5;
